@@ -14,18 +14,18 @@
 <meta property="og:site_name" content="オトナリゾート">
 <meta property="og:locale" content="ja_JP">
 <!-- TODO: 専用のシェア画像（1200x630px）が用意でき次第、下記を本番URLに差し替えてください -->
-<meta property="og:image" content="https://otona-resort.com/assets/logo.png">
+<meta property="og:image" content="https://otona-resort.com/logo.png">
 <meta name="twitter:card" content="summary">
 <meta name="theme-color" content="#faf7f1">
-<link rel="icon" href="assets/logo.png" type="image/png">
-<link rel="apple-touch-icon" href="assets/logo.png">
+<link rel="icon" href="logo.png" type="image/png">
+<link rel="apple-touch-icon" href="logo.png">
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
   "@type": "Organization",
   "name": "オトナリゾート",
   "url": "https://otona-resort.com/",
-  "logo": "https://otona-resort.com/assets/logo.png",
+  "logo": "https://otona-resort.com/logo.png",
   "sameAs": [
     "https://www.tiktok.com/@otona_resort",
     "https://www.instagram.com/otona_resort/"
@@ -249,16 +249,32 @@
     .nav-right .cta-btn { display: none; }
     .menu-toggle { display: inline-flex; }
 
+    .menu-overlay {
+      position: fixed; inset: 0; z-index: 35;
+      background: rgba(20,27,38,0.4);
+      opacity: 0; pointer-events: none;
+      transition: opacity 0.25s ease;
+    }
+    .menu-overlay.is-open { opacity: 1; pointer-events: auto; }
+
     .mobile-menu {
       display: block;
+      position: fixed; top: 0; right: 0; bottom: 0; z-index: 40;
+      width: min(78vw, 320px);
       max-width: none;
-      border-bottom: 1px solid var(--line);
+      border-left: 1px solid var(--line);
       background: var(--bg);
+      box-shadow: -12px 0 32px rgba(20,27,38,0.18);
+      padding-top: 60px;
+      overflow-y: auto;
+      transform: translateX(100%);
+      transition: transform 0.28s ease;
     }
+    .mobile-menu.is-open { transform: translateX(0); }
     .mobile-menu[hidden] { display: none; }
-    .mobile-menu ul { list-style: none; margin: 0; padding: 8px 10px 14px; display: flex; flex-direction: column; }
+    .mobile-menu ul { list-style: none; margin: 0; padding: 12px; display: flex; flex-direction: column; }
     .mobile-menu a {
-      display: flex; align-items: center; min-height: 48px; padding: 0 12px;
+      display: flex; align-items: center; min-height: 48px; padding: 0 14px;
       font-size: 15px; font-weight: 500; color: var(--ink); border-radius: 8px;
     }
     .mobile-menu a:hover, .mobile-menu a:focus-visible { background: var(--bg-alt); color: var(--accent-text); text-decoration: none; }
@@ -311,7 +327,6 @@
 
     .contact-inner { margin-top: 20px; gap: 16px; }
     .contact-inner p { font-size: 14px; }
-    .contact-inner .cta-btn { display: none; } /* CTA lives in the floating bar on mobile */
 
     .footer { padding: 40px 22px 28px; }
     .footer-inner { flex-direction: column; gap: 22px; }
@@ -344,7 +359,7 @@
 
 <header class="nav">
   <div class="nav-inner">
-    <a class="logo" href="#top"><img src="assets/logo.png" alt="" width="30" height="30"> オトナリゾート</a>
+    <a class="logo" href="#top"><img src="logo.png" alt="" width="30" height="30"> オトナリゾート</a>
 
     <nav aria-label="メインナビゲーション">
       <ul class="navlinks">
@@ -352,7 +367,7 @@
         <li><a href="#problems">Challenges</a></li>
         <li><a href="#case">Case</a></li>
         <li><a href="#service">Service</a></li>
-        <li><a href="#contact">Contact</a></li>
+        <li><a href="https://forms.gle/7gJNzR6AHnUiV2kE8" target="_blank" rel="noopener noreferrer">Contact</a></li>
       </ul>
     </nav>
 
@@ -365,20 +380,21 @@
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><rect x="3.5" y="3.5" width="17" height="17" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="16.6" cy="7.4" r="1"/></svg>
         </a>
       </div>
-      <a class="cta-btn" href="#contact">無料相談を申し込む</a>
+      <a class="cta-btn" href="https://forms.gle/7gJNzR6AHnUiV2kE8" target="_blank" rel="noopener noreferrer">無料相談を申し込む</a>
       <button type="button" class="menu-toggle" id="menuToggle" aria-expanded="false" aria-controls="mobileMenu" aria-label="メニューを開く">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><line x1="4" y1="7" x2="20" y2="7"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="17" x2="20" y2="17"/></svg>
       </button>
     </div>
   </div>
 
+  <div class="menu-overlay" id="menuOverlay" hidden></div>
   <nav class="mobile-menu" id="mobileMenu" aria-label="モバイルナビゲーション" hidden>
     <ul>
       <li><a href="#about">About</a></li>
       <li><a href="#problems">Challenges</a></li>
       <li><a href="#case">Case</a></li>
       <li><a href="#service">Service</a></li>
-      <li><a href="#contact">Contact</a></li>
+      <li><a href="https://forms.gle/7gJNzR6AHnUiV2kE8" target="_blank" rel="noopener noreferrer">Contact</a></li>
     </ul>
   </nav>
 </header>
@@ -395,7 +411,7 @@
       <h1 class="serif">SNS×マーケティング×AI<span class="rule" aria-hidden="true"></span>効率的なホテル運営へ</h1>
       <p class="sub">現場の負担を減らし、集客の仕組みを作ります。</p>
       <div class="hero-actions">
-        <a class="cta-btn" href="#contact">無料相談を申し込む</a>
+        <a class="cta-btn" href="https://forms.gle/7gJNzR6AHnUiV2kE8" target="_blank" rel="noopener noreferrer">無料相談を申し込む</a>
       </div>
     </div>
   </section>
@@ -521,11 +537,10 @@
 
 <footer class="footer">
   <div class="footer-inner">
-    <div class="footer-brand"><img src="assets/logo.png" alt="" width="24" height="24"> オトナリゾート</div>
+    <div class="footer-brand"><img src="logo.png" alt="" width="24" height="24"> オトナリゾート</div>
     <div class="footer-col">
       <span>お問い合わせ</span>
-      <a href="mailto:info@otonari-resort.jp">info@otonari-resort.jp（仮）</a>
-      <a href="#contact">お問い合わせフォーム</a>
+      <a href="https://forms.gle/7gJNzR6AHnUiV2kE8" target="_blank" rel="noopener noreferrer">お問い合わせフォーム</a>
     </div>
     <div class="footer-col">
       <span>Follow us</span>
@@ -552,21 +567,37 @@
     <span class="l1">まずは相談してみる</span>
     <span class="l2">無料相談受付中</span>
   </div>
-  <a class="cta-btn" href="#contact">無料相談を申し込む</a>
+  <a class="cta-btn" href="https://forms.gle/7gJNzR6AHnUiV2kE8" target="_blank" rel="noopener noreferrer">無料相談を申し込む</a>
 </div>
 
 <script>
 (function () {
   var toggle = document.getElementById('menuToggle');
   var menu = document.getElementById('mobileMenu');
+  var overlay = document.getElementById('menuOverlay');
+  var closeTimer;
 
   function closeMenu() {
-    menu.hidden = true;
+    clearTimeout(closeTimer);
+    menu.classList.remove('is-open');
+    overlay.classList.remove('is-open');
+    document.body.style.overflow = '';
     toggle.setAttribute('aria-expanded', 'false');
     toggle.setAttribute('aria-label', 'メニューを開く');
+    closeTimer = setTimeout(function () {
+      menu.hidden = true;
+      overlay.hidden = true;
+    }, 280);
   }
   function openMenu() {
+    clearTimeout(closeTimer);
     menu.hidden = false;
+    overlay.hidden = false;
+    requestAnimationFrame(function () {
+      menu.classList.add('is-open');
+      overlay.classList.add('is-open');
+    });
+    document.body.style.overflow = 'hidden';
     toggle.setAttribute('aria-expanded', 'true');
     toggle.setAttribute('aria-label', 'メニューを閉じる');
     var firstLink = menu.querySelector('a');
@@ -580,6 +611,11 @@
 
   menu.addEventListener('click', function (e) {
     if (e.target.tagName === 'A') { closeMenu(); toggle.focus(); }
+  });
+
+  overlay.addEventListener('click', function () {
+    closeMenu();
+    toggle.focus();
   });
 
   document.addEventListener('keydown', function (e) {
