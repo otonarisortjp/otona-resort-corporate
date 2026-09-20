@@ -98,6 +98,8 @@
     color: var(--ink);
     font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Hiragino Sans", "Hiragino Kaku Gothic ProN", sans-serif;
     -webkit-font-smoothing: antialiased;
+    word-break: keep-all;
+    overflow-wrap: normal;
   }
   .serif { font-family: ui-serif, Georgia, "Hiragino Mincho ProN", "Yu Mincho", serif; }
   a { color: var(--accent-text); text-decoration: none; }
@@ -204,7 +206,7 @@
   /* about */
   .about-inner { display: flex; gap: 80px; align-items: flex-start; }
   .about-inner .col-label { width: 240px; flex: none; }
-  .about-body { flex: 1; font-size: 16.5px; line-height: 1.95; color: #2b3240; max-width: 600px; overflow-wrap: break-word; }
+  .about-body { flex: 1; font-size: 16.5px; line-height: 1.95; color: #2b3240; max-width: 600px; word-break: normal; overflow-wrap: break-word; }
   .about-body p + p { margin-top: 20px; }
 
   /* problems */
@@ -219,7 +221,7 @@
   .case-item { border: 1px solid var(--line); border-radius: 8px; padding: 30px 26px; }
   .case-body { display: flex; flex-direction: column; gap: 10px; }
   .case-tag { font-size: 12px; font-weight: 600; letter-spacing: 0.04em; color: var(--accent-text); }
-  .case-body h3 { font-size: 18px; font-weight: 600; line-height: 1.4; overflow-wrap: break-word; }
+  .case-body h3 { font-size: 18px; font-weight: 600; line-height: 1.4; word-break: normal; overflow-wrap: break-word; }
   .case-body p { font-size: 14.5px; line-height: 1.75; color: var(--muted); }
 
   /* service */
@@ -452,8 +454,8 @@
         <h2 class="section-title serif">私たちの想い</h2>
       </div>
       <div class="about-body">
-        <p>「良いホテルが見つからない」「自分達の良さが伝わらない」。そんな声をよく耳にします。</p>
-        <p>近くの日常にも、少し遠くの旅先にも、海を越えてきた旅人にも――上質なホテル体験を多くの人に伝えたい。</p>
+        <p>「良いホテルが見つからない」<br>「自分達の良さが伝わらない」<br>そんな声をよく耳にします。</p>
+        <p>日常にも、少し遠くの旅先にも、海を越えてきた旅行者にも<br>――上質なホテル体験を多くの人に伝えたい。</p>
         <p>その想いから、私たちは始まりました。</p>
       </div>
     </div>
