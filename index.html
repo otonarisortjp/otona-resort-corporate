@@ -118,10 +118,11 @@
   }
 
   .skip-link {
-    position: absolute; left: -9999px; top: 0; z-index: 100;
+    position: absolute; left: 0; top: 0; z-index: 100;
+    transform: translateY(-150%);
     background: var(--ink); color: #fff; padding: 12px 20px; border-radius: 0 0 6px 0;
   }
-  .skip-link:focus { left: 0; }
+  .skip-link:focus { transform: translateY(0); }
 
   /* ===== Header / Nav (desktop) ===== */
   .nav {
